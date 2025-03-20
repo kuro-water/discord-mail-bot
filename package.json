@@ -8,8 +8,8 @@
   "main": "main.ts",
   "scripts": {
     "test": "ts-node src/main.ts",
-    "start": "node build/main.js",
-    "compile": "tsc -p ."
+    "start": "tsc && node build/main.js",
+    "compile": "tsc ."
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
