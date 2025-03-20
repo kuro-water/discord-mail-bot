@@ -9,11 +9,10 @@ readyイベントごとにこれを実行したりする必要はありません
 個別に実行することを目的としています。再デプロイせずに、実行関数などの部分を好きなだけ変更できます。
 */
 
-import {Command} from "../@types/types";
+import {REST, Routes} from "discord.js";
 import {ping} from "../commands/utility/ping";
 import {server} from "../commands/utility/server";
 import {user} from "../commands/utility/user";
-import {REST, Routes} from "discord.js";
 import dotenv from "dotenv";
 
 //.envファイルを読み込む
@@ -21,10 +20,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 // 登録するコマンド
-const commands: Command[] = [
+const commands = [
     ping.data.toJSON(),
     server.data.toJSON(),
-    user.data.toJSON()];
+    user.data.toJSON()
+];
 
 const rest = new REST().setToken(process.env.TOKEN as string);
 

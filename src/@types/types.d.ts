@@ -1,10 +1,11 @@
-import {Client, Collection} from "discord.js";
+import {ChatInputCommandInteraction, Client, Collection, SlashCommandBuilder} from "discord.js";
 
 export interface MyClient extends Client {
-    commands: Collection<string, Command>;
+    commands: Collection<string, SlashCommand>;
 }
 
-export interface Command {
-    data;
-    execute(interaction): Promise<void>;
+export interface SlashCommand {
+    data: SlashCommandBuilder;
+
+    execute(interaction: ChatInputCommandInteraction): Promise<void>;
 }
