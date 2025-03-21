@@ -10,23 +10,17 @@ readyイベントごとにこれを実行したりする必要はありません
 */
 
 import {REST, Routes} from "discord.js";
-import {ping} from "../commands/utility/ping";
-import {server} from "../commands/utility/server";
-import {user} from "../commands/utility/user";
 import dotenv from "dotenv";
-import {role} from "../commands/utility/role";
+import {commandList} from "../commands/commandList";
+import {SlashCommand} from "../@types/types";
 
 //.envファイルを読み込む
 // usage : process.env.TOKEN
 dotenv.config();
 
 // 登録するコマンド
-const commands = [
-    ping.data.toJSON(),
-    server.data.toJSON(),
-    user.data.toJSON(),
-    role.data.toJSON(),
-];
+const commands =
+    commandList.map((command: SlashCommand) => command.data.toJSON());
 
 const rest = new REST().setToken(process.env.TOKEN as string);
 

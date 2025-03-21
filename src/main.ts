@@ -1,12 +1,8 @@
 import {Client, Collection, GatewayIntentBits} from "discord.js";
 import dotenv from "dotenv";
 import {EventOn, EventOnce, MyClient} from "./@types/types";
-import {ping} from "./commands/utility/ping";
-import {server} from "./commands/utility/server";
-import {user} from "./commands/utility/user";
-import {role} from "./commands/utility/role";
-import {clientReady} from "./events/clientReady";
-import {interactionCreate} from "./events/interactionCreate";
+import {commandList} from "./commands/commandList";
+import {eventList} from "./events/eventList";
 
 //.envファイルを読み込む
 // usage : process.env.TOKEN
@@ -16,10 +12,9 @@ const client = new Client({intents: [GatewayIntentBits.Guilds]}) as MyClient;
 
 // コマンド登録
 client.commands = new Collection();
-client.commands.set(ping.data.name, ping);
-client.commands.set(server.data.name, server);
-client.commands.set(user.data.name, user);
-client.commands.set(role.data.name, role);
+commandList.map((command) => {
+    client.commands.set(command.data.name, command);
+});
 
 
 const handleInteractions = (event: EventOn | EventOnce): void => {
@@ -35,8 +30,9 @@ const handleInteractions = (event: EventOn | EventOnce): void => {
 };
 
 // イベント登録
-handleInteractions(clientReady);
-handleInteractions(interactionCreate);
+eventList.map((event) => {
+    handleInteractions(event);
+});
 
 // ログイン
 client.login(process.env.TOKEN);

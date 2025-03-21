@@ -1,4 +1,4 @@
-import {EventOn, MyClient} from "../@types/types";
+import {EventOn, MyClient} from "../../@types/types";
 import {Events, MessageFlags} from "discord.js";
 
 // インタラクション（スラッシュコマンドなど）が発生したときに実行されるイベント
