@@ -10,37 +10,32 @@ readyイベントごとにこれを実行したりする必要はありません
 */
 
 import {REST, Routes} from "discord.js";
-import {ping} from "../commands/utility/ping";
-import {server} from "../commands/utility/server";
-import {user} from "../commands/utility/user";
 import dotenv from "dotenv";
 
 //.envファイルを読み込む
 // usage : process.env.TOKEN
 dotenv.config();
 
-// 登録するコマンド
-const commands = [
-    ping.data.toJSON(),
-    server.data.toJSON(),
-    user.data.toJSON()
-];
-
 const rest = new REST().setToken(process.env.TOKEN as string);
 
-// deploy
+// delete
 (async () => {
     try {
-        console.log(`${commands.length}個のスラッシュコマンドを登録します。`);
+        console.log("すべてのスラッシュコマンドを削除します。");
 
-        const data = await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID as string),
-            {body: commands},
+        const commands = await rest.get(
+            Routes.applicationCommands(process.env.CLIENT_ID as string)
         );
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        console.log(`${data.length}個のスラッシュコマンドを登録しました。`);
+        if (Array.isArray(commands)) {
+            for (const command of commands) {
+                await rest.delete(
+                    `${Routes.applicationCommands(process.env.CLIENT_ID as string)}/${command.id}`
+                );
+            }
+            console.log(`${commands.length}個のスラッシュコマンドを削除しました。`);
+        }
+
     } catch (error) {
         console.error(error);
     }

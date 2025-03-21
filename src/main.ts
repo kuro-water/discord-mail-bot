@@ -4,6 +4,7 @@ import {MyClient} from "./@types/types";
 import {ping} from "./commands/utility/ping";
 import {server} from "./commands/utility/server";
 import {user} from "./commands/utility/user";
+import {role} from "./commands/utility/role";
 
 //.envファイルを読み込む
 // usage : process.env.TOKEN
@@ -16,6 +17,7 @@ client.commands = new Collection();
 client.commands.set(ping.data.name, ping);
 client.commands.set(server.data.name, server);
 client.commands.set(user.data.name, user);
+client.commands.set(role.data.name, role);
 
 // クライアントの準備ができたら、以下のコードを実行する（一度だけ）。
 // `client： Client<boolean>` と `readyClient： Client<true>` の区別は TypeScript 開発者にとって重要である。
