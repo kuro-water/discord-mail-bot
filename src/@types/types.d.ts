@@ -9,3 +9,15 @@ export interface SlashCommand {
 
     execute(interaction: ChatInputCommandInteraction): Promise<void>;
 }
+
+export interface EventOnce {
+    name: string;
+
+    execute(readyClient: Client<true>): Promise<void>;
+}
+
+export interface EventOn {
+    name: string;
+
+    execute(interaction: ChatInputCommandInteraction): Promise<void>;
+}
