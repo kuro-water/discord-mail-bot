@@ -1,26 +1,29 @@
 {
-  "name": "discord-mail-bot",
-  "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "kuro-water",
-  "type": "commonjs",
-  "main": "main.ts",
-  "scripts": {
-    "test": "ts-node src/main.ts",
-    "start": "tsc && node build/main.js",
-    "compile": "tsc ."
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "eslint": "^9.22.0",
-    "globals": "^16.0.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.27.0"
-  },
-  "dependencies": {
-    "discord.js": "^14.18.0",
-    "dotenv": "^16.4.7"
-  }
+    "name": "discord-mail-bot",
+    "version": "1.0.0",
+    "description": "",
+    "license": "ISC",
+    "author": "kuro-water",
+    "type": "commonjs",
+    "main": "main.ts",
+    "scripts": {
+        "test": "ts-node src/main.ts",
+        "start": "tsc && node build/main.js",
+        "compile": "tsc",
+        "build": "tsc && npm run copy-assets",
+        "copy-assets": "copyfiles -u 1 src/images/* build/"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.22.0",
+        "copyfiles": "^2.4.1",
+        "eslint": "^9.22.0",
+        "globals": "^16.0.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.2",
+        "typescript-eslint": "^8.27.0"
+    },
+    "dependencies": {
+        "discord.js": "^14.18.0",
+        "dotenv": "^16.4.7"
+    }
 }
