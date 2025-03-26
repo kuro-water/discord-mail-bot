@@ -10,8 +10,9 @@
         "test": "ts-node src/main.ts",
         "start": "tsc && node build/main.js",
         "compile": "tsc",
-        "build": "tsc && npm run copy-assets",
-        "copy-assets": "copyfiles -u 1 src/images/* build/"
+        "copy-assets": "copyfiles -u 1 src/images/* build/",
+        "build": "npm run compile && npm run copy-assets",
+        "deploy": "ts-node src/deploys/deployCommand.ts"
     },
     "devDependencies": {
         "@eslint/js": "^9.22.0",

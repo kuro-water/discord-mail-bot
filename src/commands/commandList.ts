@@ -2,8 +2,10 @@ import {ping} from "./utility/ping";
 import {role} from "./utility/role";
 import {server} from "./utility/server";
 import {user} from "./utility/user";
-import {embed} from "./utility/embed";
+import {embed} from "./test/embed";
+import {menu} from "./test/menu";
+import {button} from "./test/button";
 
 export const commandList = [
-    embed, ping, role, server, user
+    embed, ping, role, server, user, menu, button
 ];
