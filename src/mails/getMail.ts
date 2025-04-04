@@ -52,6 +52,7 @@ const getSingleAccountEmails = async (options: imaps.ImapSimpleOptions) => {
             const parsed = textPart ? await simpleParser(textPart.body) : null;
 
             const mailHeader: MailHeader = {
+                server: options.imap.host || "",
                 subject: headerPart.body.subject[0],
                 from: headerPart.body.from[0],
                 to: headerPart.body.to[0],
@@ -72,10 +73,10 @@ const getSingleAccountEmails = async (options: imaps.ImapSimpleOptions) => {
     return mailInfo;
 };
 
-export const getEmails = async (configs: imaps.ImapSimpleOptions[]) => {
+export const getEmails = async (configs: imaps.ImapSimpleOptions[] = config) => {
     return await Promise.all(configs.map(config => getSingleAccountEmails(config)));
 };
 
-(async () => {
-    console.dir(await getEmails(config).catch(console.error), {depth: null});
-})();
+// (async () => {
+//     console.dir(await getEmails(config).catch(console.error), {depth: null});
+// })();

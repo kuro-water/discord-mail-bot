@@ -14,6 +14,7 @@ export interface Env {
 }
 
 interface MailHeader {
+    server: string;
     subject: string;
     from: string;
     to: string;

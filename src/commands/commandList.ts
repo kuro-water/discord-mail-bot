@@ -5,7 +5,8 @@ import {user} from "./utility/user";
 import {embed} from "./test/embed";
 import {menu} from "./test/menu";
 import {button} from "./test/button";
+import {mail} from "./utility/mail";
 
 export const commandList = [
-    embed, ping, role, server, user, menu, button
+    embed, ping, role, server, user, menu, button, mail
 ];
