@@ -10,13 +10,9 @@ readyイベントごとにこれを実行したりする必要はありません
 */
 
 import {REST, Routes} from "discord.js";
-import dotenv from "dotenv";
+import {env} from "../env";
 
-//.envファイルを読み込む
-// usage : process.env.TOKEN
-dotenv.config();
-
-const rest = new REST().setToken(process.env.TOKEN as string);
+const rest = new REST().setToken(env.TOKEN);
 
 // delete
 (async () => {
@@ -24,13 +20,13 @@ const rest = new REST().setToken(process.env.TOKEN as string);
         console.log("すべてのスラッシュコマンドを削除します。");
 
         const commands = await rest.get(
-            Routes.applicationCommands(process.env.CLIENT_ID as string)
+            Routes.applicationCommands(env.CLIENT_ID)
         );
 
         if (Array.isArray(commands)) {
             for (const command of commands) {
                 await rest.delete(
-                    `${Routes.applicationCommands(process.env.CLIENT_ID as string)}/${command.id}`
+                    `${Routes.applicationCommands(env.CLIENT_ID)}/${command.id}`
                 );
             }
             console.log(`${commands.length}個のスラッシュコマンドを削除しました。`);

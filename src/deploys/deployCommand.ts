@@ -10,13 +10,10 @@ readyイベントごとにこれを実行したりする必要はありません
 */
 
 import {REST, Routes} from "discord.js";
-import dotenv from "dotenv";
 import {commandList} from "../commands/commandList";
 import {SlashCommand} from "../@types/types";
+import {env} from "../env";
 
-//.envファイルを読み込む
-// usage : process.env.TOKEN
-dotenv.config();
 
 // 登録するコマンド
 const commands =
@@ -30,7 +27,7 @@ const rest = new REST().setToken(process.env.TOKEN as string);
         console.log(`${commands.length}個のスラッシュコマンドを登録します。`);
 
         const data = await rest.put(
-            Routes.applicationCommands(process.env.CLIENT_ID as string),
+            Routes.applicationCommands(env.CLIENT_ID),
             {body: commands},
         );
 

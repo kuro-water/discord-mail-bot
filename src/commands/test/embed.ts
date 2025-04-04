@@ -7,7 +7,7 @@ export const embed: SlashCommand = {
         .setName("embed")
         .setDescription("埋め込みメッセージのテストだよ"),
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
-        const filePath = path.join(__dirname, "../../images/icon.jpg");
+        const filePath = path.join(__dirname, "../../resources/images/icon.jpg");
         const icon = new AttachmentBuilder(filePath);
 
         const embed = new EmbedBuilder()

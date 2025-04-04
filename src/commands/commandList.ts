@@ -1,5 +1,5 @@
 import {ping} from "./utility/ping";
-import {role} from "./utility/role";
+import {role} from "./test/role";
 import {server} from "./utility/server";
 import {user} from "./utility/user";
 import {embed} from "./test/embed";

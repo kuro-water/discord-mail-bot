@@ -1,12 +1,8 @@
 import {Client, Collection, GatewayIntentBits} from "discord.js";
-import dotenv from "dotenv";
 import {EventOn, EventOnce, MyClient} from "./@types/types";
 import {commandList} from "./commands/commandList";
 import {eventList} from "./events/eventList";
-
-//.envファイルを読み込む
-// usage : process.env.TOKEN
-dotenv.config();
+import {env} from "./env";
 
 const client = new Client({intents: [GatewayIntentBits.Guilds]}) as MyClient;
 
@@ -35,4 +31,4 @@ eventList.map((event) => {
 });
 
 // ログイン
-client.login(process.env.TOKEN);
+client.login(env.TOKEN);
