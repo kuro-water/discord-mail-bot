@@ -1,4 +1,4 @@
-import {Client, Collection, GatewayIntentBits} from "discord.js";
+import {CacheType, ChatInputCommandInteraction, Client, Collection, GatewayIntentBits} from "discord.js";
 import {EventOn, EventOnce, MyClient} from "./@types/types";
 import {commandList} from "./commands/commandList";
 import {eventList} from "./events/eventList";
@@ -15,11 +15,11 @@ commandList.map((command) => {
 
 const handleInteractions = (event: EventOn | EventOnce): void => {
     if ((event as EventOnce).name) {
-        client.once(event.name, async (readyClient) => {
+        client.once(event.name, async (readyClient: Client<true> & ChatInputCommandInteraction<CacheType>) => {
             await event.execute(readyClient);
         });
     } else {
-        client.on(event.name, async (interaction) => {
+        client.on(event.name, async (interaction: Client<true> & ChatInputCommandInteraction<CacheType>) => {
             await event.execute(interaction);
         });
     }

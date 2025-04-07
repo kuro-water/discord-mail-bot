@@ -8,6 +8,6 @@ export const clientReady: EventOnce = {
     name: Events.ClientReady,
     async execute(readyClient) {
         console.log(`ready. Logged in as "${readyClient.user.tag}"`);
-        console.dir(readyClient);
+        // console.dir(readyClient);
     }
 };

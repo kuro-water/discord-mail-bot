@@ -12,7 +12,7 @@ export default [
     {
         rules: {
             "no-console": "off",
-            indent: ["error", 4], // インデントを4スペースで強制
+            indent: ["error", 4, {SwitchCase: 1}], // インデントを4スペースで強制
             quotes: ["error", "double"], // ダブルクォートを強制
             semi: ["error", "always"],
             camelcase: ["error", {properties: "always"}], // キャメルケースを強制
