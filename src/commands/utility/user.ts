@@ -10,11 +10,11 @@ export const user: SlashCommand = {
     // interaction.member は、特定のギルドのユーザーを表す GuildMember オブジェクト
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
         if (!interaction.member || !("joinedAt" in interaction.member)) {
-            await interaction.reply("ここはサーバーじゃないみたい。サーバー内で試してみてね");
+            await interaction.reply("このコマンドはサーバー内で実行してください");
             console.log("interaction.member.joinedAtにアクセスできません");
             return;
         }
 
-        await interaction.reply(`${interaction.user.displayName}（${interaction.user.username}）さんは${interaction.member.joinedAt}にこのサーバーに来たよ`);
+        await interaction.reply(`${interaction.user.displayName}（${interaction.user.username}）さんは${interaction.member.joinedAt}にこのサーバーに来ました`);
     },
 };

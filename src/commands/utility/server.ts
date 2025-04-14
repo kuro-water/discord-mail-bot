@@ -4,11 +4,11 @@ import {SlashCommand} from "../../@types/types";
 export const server: SlashCommand = {
     data: new SlashCommandBuilder()
         .setName("server")
-        .setDescription("サーバー情報を表示するよ"),
+        .setDescription("サーバー情報を表示します"),
     // interaction.guildは、コマンドが実行されたギルドを表すオブジェクトです。
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
         if (!interaction.guild) {
-            await interaction.reply("ここはサーバーじゃないみたい。サーバー内で試してみてね");
+            await interaction.reply("このコマンドはサーバー内で実行してください");
             console.log("interaction.guildにアクセスできません");
             return;
         }
