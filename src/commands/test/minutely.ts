@@ -32,11 +32,11 @@ export const minutely: SlashCommand = {
         const scheduleTypeSelect = new StringSelectMenuBuilder()
             .setCustomId("schedule-type-select")
             .setPlaceholder("頻度を選択")
-            .addOptions(Object.values(ScheduleType).map((scheduleType) => {
+            .addOptions(Object.entries(ScheduleType).map(([str, scheduleType]) => {
                 return new StringSelectMenuOptionBuilder()
                     .setLabel(scheduleType)
                     .setDescription("頻度")
-                    .setValue(scheduleType);
+                    .setValue(str);
             }));
         const channelSelect = new StringSelectMenuBuilder()
             .setCustomId("channel-select")
@@ -63,20 +63,23 @@ export const minutely: SlashCommand = {
         // コレクタの作成
         const collector = response.resource.message.createMessageComponentCollector({
             componentType: ComponentType.StringSelect,
-            time: 3_600_000
+            time: 3_600_000 // タイムアウト時間（ms）
         });
         collector.on("collect", async i => {
-            // メニューの何れかが選択されたときに実行される
-            // 正しい動きはこれではなく、[0]にどちらかユーザが選択した方の答えが入る
-            // ので、どっちなのか判別して個別にセットするか、
-            // メニューみたいなの開くスタイルにするか。
-            const scheduleType = i.values[0];
-            const selection = i.values[1];
-
-            Schedule.scheduleType = ScheduleType[scheduleType as keyof typeof ScheduleType];
-            Schedule.channelId = selection;
-            console.log(`${selection}, ${textChannels.get(selection)}`);
-            await i.reply(`${scheduleType}で${textChannels.get(selection)}にメール通知を送るよ`);
+            // メニューのどれかが選択されたときに実行される
+            if (i.customId === "schedule-type-select") {
+                const scheduleType = i.values[0];
+                Schedule.scheduleType = ScheduleType[scheduleType as keyof typeof ScheduleType];
+                const text = Schedule.scheduleType === ScheduleType.NONE ? "メール通知を止めるよ" : `${Schedule.scheduleType}メール通知を送るよ`;
+                console.log(text);
+                await i.reply(text);
+            } else if (i.customId === "channel-select") {
+                const channelId = i.values[0];
+                Schedule.channelId = channelId;
+                const text = `${textChannels.get(channelId)}にメール通知を送るよ`;
+                console.log(text);
+                await i.reply(text);
+            }
         });
     },
 };

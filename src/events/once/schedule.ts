@@ -1,8 +1,8 @@
 export enum ScheduleType {
-    NONE = "none",
-    MINUTELY = "minutely",
-    HOURLY = "hourly",
-    DAILY = "daily",
+    NONE = "無し",
+    MINUTELY = "毎分",
+    HOURLY = "毎時",
+    DAILY = "毎日",
 }
 
 export class Schedule {
@@ -27,6 +27,7 @@ export class Schedule {
     };
 
     static checkScheduleType(now: Date): boolean {
+        // console.log(`ScheduleType: ${this.scheduleType}`);
         if (!this.lastExecutionTime) {
             // 初回実行時処理
             // ScheduleTypeがNONEでなければ実行
