@@ -13,6 +13,7 @@
         "copy-assets": "copyfiles -u 1 src/resources/images/* build/",
         "build": "npm run compile && npm run copy-assets",
         "deploy": "ts-node src/deploys/deployCommand.ts",
+        "delete": "ts-node src/deploys/deleteCommand.ts",
         "mail": "ts-node src/mails/getMail.ts"
     },
     "devDependencies": {

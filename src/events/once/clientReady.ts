@@ -17,23 +17,31 @@ export const clientReady: EventOnce = {
                 // チャンネルを取得
                 const channel = await readyClient.channels.fetch(Schedule.channelId);
 
-                // チャンネルがテキストチャンネルの場合、メッセージを送信
-                if (channel && channel.isTextBased()) {
-                    const ch = channel as TextChannel;
+                // テキストチャンネルであることを確認
+                if (!channel || !channel.isTextBased()) {
+                    console.error(`${Schedule.channelId}はテキストチャンネルではありません`);
+                    return;
+                }
+                console.log("メールを取得中...");
+                const ch = channel as TextChannel;
+                const icon = new AttachmentBuilder(path.join(__dirname, "../../resources/images/icon.jpg"));
 
-                    const sent = await ch.send("メールを取得中...");
-                    const icon = new AttachmentBuilder(path.join(__dirname, "../../resources/images/icon.jpg"));
-
+                try {
                     const mails = await getEmails();
                     const embeds = mails.flatMap((mail) => mailToEmbed(mail));
 
-                    await sent.edit(`${embeds.length}件のメールがあります`);
+                    if (embeds.length === 0) {
+                        console.log("メールはありませんでした");
+                        return;
+                    }
+                    await ch.send(`${embeds.length}件のメールがあります`);
+                    console.log(`${embeds.length}件のメールがあります`);
                     embeds.map(async (embed) => {
                         await ch.send({embeds: [embed], files: [icon]});
                     });
-
-                } else {
-                    console.error("指定されたチャンネルはテキストチャンネルではありません");
+                } catch (e) {
+                    console.error("メールの取得中にエラーが発生しました:", e);
+                    await ch.send(`メールの取得中にエラーが発生しました: ${e}`);
                 }
             } catch (error) {
                 console.error("チャンネルへのメッセージ送信中にエラーが発生しました:", error);

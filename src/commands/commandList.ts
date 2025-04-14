@@ -1,16 +1,13 @@
-import {ping} from "./utility/ping";
-import {role} from "./test/role";
-import {server} from "./utility/server";
-import {user} from "./utility/user";
+import {button} from "./test/button";
 import {embed} from "./test/embed";
 import {menu} from "./test/menu";
-import {button} from "./test/button";
+import {schedule} from "./test/schedule";
+import {role} from "./test/role";
 import {mail} from "./utility/mail";
-import {hourly} from "./test/hourly";
-import {minutely} from "./test/minutely";
-import {daily} from "./test/daily";
-import {weekly} from "./test/weekly";
+import {ping} from "./utility/ping";
+import {server} from "./utility/server";
+import {user} from "./utility/user";
 
 export const commandList = [
-    embed, ping, role, server, user, menu, button, mail, minutely, hourly, daily, weekly
+    embed, ping, role, server, user, menu, button, mail, schedule
 ];

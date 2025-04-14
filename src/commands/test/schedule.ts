@@ -10,10 +10,10 @@ import {
 import {SlashCommand} from "../../@types/types";
 import {Schedule, ScheduleType} from "../../events/once/schedule";
 
-export const minutely: SlashCommand = {
+export const schedule: SlashCommand = {
     data: new SlashCommandBuilder()
-        .setName("minutely")
-        .setDescription("毎分0秒になんかするよ"),
+        .setName("schedule")
+        .setDescription("メール通知のスケジュールを設定します"),
     async execute(interaction: ChatInputCommandInteraction): Promise<void> {
         // 現在いるサーバーのチャンネル一覧を取得
         const guild = interaction.guild;
