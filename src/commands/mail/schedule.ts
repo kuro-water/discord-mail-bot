@@ -56,7 +56,7 @@ export const schedule: SlashCommand = {
 
         // メニューを送信
         const response = await interaction.reply({
-            content: "メール通知を流すテキストチャンネルを選んでね", components: [row, row2], withResponse: true,
+            content: "メール通知を送信するチャンネルを選んでください", components: [row, row2], withResponse: true,
         });
         if (!response.resource || !response.resource.message) return;
 
@@ -70,13 +70,13 @@ export const schedule: SlashCommand = {
             if (i.customId === "schedule-type-select") {
                 const scheduleType = i.values[0];
                 Schedule.scheduleType = ScheduleType[scheduleType as keyof typeof ScheduleType];
-                const text = Schedule.scheduleType === ScheduleType.NONE ? "メール通知を止めるよ" : `${Schedule.scheduleType}メール通知を送るよ`;
+                const text = Schedule.scheduleType === ScheduleType.NONE ? "メール通知を停止します" : `${Schedule.scheduleType}メール通知を送信します`;
                 console.log(text);
                 await i.reply(text);
             } else if (i.customId === "channel-select") {
                 const channelId = i.values[0];
                 Schedule.channelId = channelId;
-                const text = `${textChannels.get(channelId)}にメール通知を送るよ`;
+                const text = `${textChannels.get(channelId)}にメール通知を送信します`;
                 console.log(text);
                 await i.reply(text);
             }
